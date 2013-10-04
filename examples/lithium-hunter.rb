@@ -23,7 +23,7 @@ PebbleTool::MediaPlayerApp.new("Lithium Hunter") do |controls|
   end
 
   quit_button = controls.previous_button
-  quit_button.on_value { puts "Bye bye!" }
+  quit_button.on_value { puts "\nBye bye!" }
   
   quit_button
 end
