@@ -15,7 +15,6 @@ puts "Wait..."
 
 watch = PebbleTool::Watch.autodetect
 watch.connect
-puts "Connected..."
 
 controller = watch.play_button.scan(0) do |accum, current|
   accum = 0 if accum > 468
@@ -32,4 +31,5 @@ game = controller.on_value do |count|
   end
 end
 
-watch.listen_for_events
+puts "MINE!!!"
+watch.listen
