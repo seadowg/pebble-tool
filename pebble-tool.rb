@@ -2,7 +2,11 @@ require "pebble"
 require "frappuccino"
 
 module PebbleTool
-  class Watch < Pebble::Watch
+  class MediaControl
+    def initialize(watch)
+      @watch = watch
+    end
+    
     def play_button
       button_event(:playpause)
     end
@@ -15,16 +19,12 @@ module PebbleTool
       button_event(:next)
     end
     
-    def listen
-      listen_for_events
-    end
-    
     private
     
     def button_event(button_name)
       proxy = Event.new
       
-      on_event(:media_control) do |event|
+      @watch.on_event(:media_control) do |event|
         case event.button
         when button_name
           proxy.occur
@@ -32,6 +32,18 @@ module PebbleTool
       end
       
       Frappuccino::Stream.new(proxy)
+    end
+  end
+  
+  class MediaPlayerApp
+    def initialize(&blk)
+      watch = Pebble::Watch.autodetect
+      watch.connect
+      
+      quit_event = blk.call(MediaControl.new(watch))
+      quit_event.on_value { watch.disconnect }
+    
+      watch.listen_for_events
     end
   end
   
