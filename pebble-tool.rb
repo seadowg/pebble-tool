@@ -7,6 +7,14 @@ module PebbleTool
       button_event(:playpause)
     end
     
+    def previous_button
+      button_event(:previous)
+    end
+    
+    def next_button
+      button_event(:next)
+    end
+    
     def listen
       listen_for_events
     end
