@@ -36,13 +36,15 @@ module PebbleTool
   end
   
   class MediaPlayerApp
-    def initialize(&blk)
+    def initialize(name, &blk)
+      puts "Connecting to Pebble..."
       watch = Pebble::Watch.autodetect
       watch.connect
       
       quit_event = blk.call(MediaControl.new(watch))
       quit_event.on_value { watch.disconnect }
     
+      puts "#{name} started!"
       watch.listen_for_events
     end
   end

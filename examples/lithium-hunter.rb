@@ -1,6 +1,6 @@
 require_relative '../pebble-tool'
 
-PebbleTool::MediaPlayerApp.new do |controls|
+PebbleTool::MediaPlayerApp.new("Lithium Hunter") do |controls|
   mine_button = controls.play_button.scan(0) do |accum, current|
     accum = 0 if accum > 468
     accum + (Random.new.rand * 20).ceil
