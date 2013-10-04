@@ -5,7 +5,6 @@ GEM
     pebblewatch (0.0.3)
       serialport (~> 1.1)
     serialport (1.1.0)
-    shoes (3.0.1)
 
 PLATFORMS
   ruby
@@ -13,4 +12,3 @@ PLATFORMS
 DEPENDENCIES
   frappuccino
   pebblewatch
-  shoes
