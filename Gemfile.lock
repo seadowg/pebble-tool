@@ -1,0 +1,16 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    frappuccino (0.2.0)
+    pebblewatch (0.0.3)
+      serialport (~> 1.1)
+    serialport (1.1.0)
+    shoes (3.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  frappuccino
+  pebblewatch
+  shoes
