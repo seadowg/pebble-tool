@@ -36,34 +36,38 @@ module PebbleTool
   end
   
   class App
+    def connect!
+      puts "Connecting to Pebble..."
+      @watch = Pebble::Watch.autodetect
+      @watch.connect
+    end
+    
+    def run!(name)
+      puts "#{name} started!\n\n"
+      @watch.listen_for_events
+    end
   end
   
   class MediaPlayerApp < App
     def initialize(name, &blk)
-      puts "Connecting to Pebble..."
-      watch = Pebble::Watch.autodetect
-      watch.connect
+      connect!
       
-      quit_event = blk.call(MediaControl.new(watch))
-      quit_event.on_value { watch.disconnect }
+      quit_event = blk.call(MediaControl.new(@watch))
+      quit_event.on_value { @watch.disconnect }
     
-      puts "#{name} started!\n\n"
-      watch.listen_for_events
+      run!(name)
     end
   end
   
   class NotificationApp < App
     def initialize(name, event)
-      puts "Connecting to Pebble..."
-      watch = Pebble::Watch.autodetect
-      watch.connect
+      connect!
       
       event.on_value do |notification|
-        watch.notification_sms(name, notification)
+        @watch.notification_sms(name, notification)
       end
     
-      puts "#{name} started!\n\n"
-      watch.listen_for_events
+      run!(name)
     end
   end
   
